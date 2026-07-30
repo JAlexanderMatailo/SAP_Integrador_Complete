@@ -1,0 +1,72 @@
+{
+    // Compilar y levantar el integrador en macOS/Linux, donde no hay IIS Express.
+    //
+    // El proyecto es ASP.NET Web API 2 sobre .NET Framework 4.8: no se ejecuta
+    // con `dotnet run`. Aqui se usa Mono, que trae el perfil 4.8 y xsp4 como
+    // servidor de desarrollo. En Windows nada de esto hace falta: F5 en Visual
+    // Studio sigue funcionando igual.
+    //
+    // Requisito: Mono instalado (brew install mono).
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "compilar",
+            "type": "shell",
+            "command": "msbuild",
+            "args": [
+                "IntegradorSAP.sln",
+                "/p:Configuration=Debug",
+                "/verbosity:minimal",
+                "/nologo"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            // xsp4 se ejecuta DESDE el directorio de la aplicacion, sin --root.
+            // Con --root el mapeo de rutas fisicas de Mono no resuelve y todo
+            // responde 404, incluidos los archivos estaticos de swagger-ui.
+            "label": "levantar",
+            "type": "shell",
+            "command": "xsp4",
+            "args": [
+                "--port",
+                "63180",
+                "--nonstop"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/IntegradorSAP.WebApi"
+            },
+            "dependsOn": "compilar",
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^$file$"
+                },
+                "background": {
+                    // xsp4 no termina nunca; se considera "listo" cuando
+                    // imprime la linea del puerto.
+                    "activeOnStart": true,
+                    "beginsPattern": "^xsp4",
+                    "endsPattern": "Listening on port"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "detener",
+            "type": "shell",
+            "command": "pkill -f xsp4 || true",
+            "problemMatcher": []
+        }
+    ]
+}

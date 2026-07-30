@@ -302,3 +302,7 @@ OpenCover/
 # el archivo real lleva usuarios y contraseñas por entorno.
 # Ver IntegradorSAP.WebApi/Config/sapCompanies.example.config
 **/Config/sapCompanies.config
+
+# Log de diagnostico que escribe LogGeneral (BaseDirectory/log.txt).
+# Es un artefacto de ejecucion y llevaba servidor, esquema y usuario de HANA.
+**/log.txt

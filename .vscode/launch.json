@@ -1,0 +1,28 @@
+{
+    // F5 aqui NO es el F5 de Visual Studio.
+    //
+    // El depurador de C# de VS Code lanza proyectos .NET Core/5+; este es .NET
+    // Framework 4.8 y en Mac se hospeda con Mono/xsp4 (ver tasks.json). Lo que
+    // hace esta configuracion es: compilar, levantar xsp4 y abrir Swagger.
+    //
+    // Puntos de interrupcion: no van por aqui. Requieren el depurador de Mono
+    // (extension "Mono Debug") y arrancar xsp4 con
+    //     MONO_OPTIONS=--debugger-agent=transport=dt_socket,server=y,address=127.0.0.1:55555
+    // para luego hacer attach. Mientras tanto, el diagnostico practico es
+    // IntegradorSAP.WebApi/log.txt, donde ErroresNoControladosFilter escribe
+    // cada excepcion con el mismo identificador que devuelve al llamador.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Levantar integrador y abrir Swagger",
+            "type": "chrome",
+            "request": "launch",
+            // El puerto es el mismo que declara el csproj en IISUrl, para que
+            // las URLs coincidan con las de Windows.
+            "url": "http://localhost:63180/swagger-ui/index.html",
+            "webRoot": "${workspaceFolder}/IntegradorSAP.WebApi",
+            "preLaunchTask": "levantar",
+            "postDebugTask": "detener"
+        }
+    ]
+}
