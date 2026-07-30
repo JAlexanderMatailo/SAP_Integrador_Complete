@@ -69,11 +69,19 @@ namespace IntegradorSAP.Data.Helper
         /// esquema no se puede pasar como HanaParameter —SQL no admite
         /// identificadores parametrizados—, así que la defensa es esta:
         ///
-        ///  1. Rechaza vacío.
-        ///  2. Rechaza cualquier carácter que no sea válido en un identificador
-        ///     de HANA (letras, dígitos y '_'), lo que corta la inyección.
-        ///  3. Si hay bases declaradas y no hay Sap.Login.Default, exige que el
-        ///     CompanyDB sea una de ellas: lista blanca.
+        /// Son DOS controles independientes, y conviene no confundirlos:
+        ///
+        ///  1. OBLIGATORIO, siempre activo y no configurable: rechaza vacío y
+        ///     rechaza cualquier carácter que no sea letra, dígito o '_'. Esto es
+        ///     lo que cierra la inyección por el nombre de esquema. El proyecto
+        ///     original no lo tenía.
+        ///
+        ///  2. OPCIONAL: si "Sap.CompanyDbPermitidas" trae nombres, exige que el
+        ///     CompanyDB sea uno de ellos. Si la clave está vacía o ausente, no
+        ///     se restringe por nombre y el control 1 sigue aplicando igual.
+        ///     Es una restricción operativa, no de seguridad: quien autoriza de
+        ///     verdad es SAP, que rechaza el login si el CompanyDB o las
+        ///     credenciales no son válidas.
         ///
         /// Lanza ArgumentException con un mensaje claro en vez de dejar que el
         /// error aparezca como un fallo de SQL o de conexión más adelante.

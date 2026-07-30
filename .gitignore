@@ -298,7 +298,14 @@ __pycache__/
 # OpenCover UI analysis results
 OpenCover/
 
-# Credenciales de SAP por CompanyDB. Solo se versiona la plantilla .example;
-# el archivo real lleva usuarios y contraseñas por entorno.
-# Ver IntegradorSAP.WebApi/Config/sapCompanies.example.config
+# Log de LogGeneral. Se escribe en AppDomain.BaseDirectory, que en una app web
+# es la raiz del proyecto, asi que aparece aqui al ejecutar. Es un artefacto de
+# ejecucion, no codigo.
+**/log.txt
+
+# Credenciales de SAP para pruebas locales, en formato usuario|clave.
+# Es OPCIONAL: en producción las credenciales llegan en las cabeceras
+# X-SAP-User / X-SAP-Password que envía la API consumidora.
+# El formato está documentado en el comentario de <appSettings> de Web.config.
+# Las empresas permitidas NO van aquí: están en Web.config, versionadas.
 **/Config/sapCompanies.config
