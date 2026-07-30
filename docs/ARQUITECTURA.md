@@ -69,8 +69,14 @@ Se valida antes de tocar SAP o HANA (ver [§5.2](#52-lista-blanca-de-empresas)).
 
 | URL | Qué es |
 |---|---|
+| `/` | redirige a `/swagger` |
 | `/swagger` | la interfaz para explorar y probar |
 | `/swagger/docs/v1` | el documento OpenAPI en JSON |
+
+Al pulsar **F5** en Visual Studio se abre Swagger directamente
+(`StartAction`/`StartPageUrl` en el csproj, no en el `.user`, para que aplique a
+todo el equipo). Y la raíz redirige desde `HomeController.Index`, de modo que
+funciona igual con IIS Express, con IIS en el servidor o con el sitio publicado.
 
 Las cabeceras `X-SAP-User` y `X-SAP-Password` aparecen en **todas** las
 operaciones, así que se pueden escribir desde la interfaz y probar contra SAP.

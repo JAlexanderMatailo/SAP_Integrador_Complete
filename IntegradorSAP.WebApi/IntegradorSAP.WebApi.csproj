@@ -347,6 +347,12 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
+          <!-- Al pulsar F5, abrir Swagger directamente en lugar de la raiz.
+               Va en el csproj y no en el .user porque
+               SaveServerSettingsInUserFile es False: asi aplica para todo el
+               equipo y no solo en la maquina de quien lo configuro. -->
+          <StartAction>SpecificPage</StartAction>
+          <StartPageUrl>swagger</StartPageUrl>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63180</DevelopmentServerPort>

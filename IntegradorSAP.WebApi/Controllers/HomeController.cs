@@ -8,11 +8,25 @@ namespace IntegradorSAP.WebApi.Controllers
 {
     public class HomeController : Controller
     {
+        /// <summary>
+        /// La raiz del sitio lleva a Swagger.
+        ///
+        /// Este integrador no tiene interfaz de usuario: es solo una API. La
+        /// vista Views/Home/Index.cshtml era la plantilla por defecto de MVC y no
+        /// aportaba nada, asi que / redirige a la documentacion, que es lo unico
+        /// que alguien quiere ver al abrir el sitio.
+        ///
+        /// Se hace aqui, y no solo con la pagina de inicio del proyecto, para que
+        /// funcione con cualquier host: IIS Express al pulsar F5, IIS en el
+        /// servidor, o el sitio publicado.
+        ///
+        /// Es un 302 (temporal) a proposito y no un 301: si algun dia se quiere
+        /// una pagina de inicio de verdad, un 301 quedaria cacheado en los
+        /// navegadores y costaria revertirlo.
+        /// </summary>
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
-
-            return View();
+            return Redirect("~/swagger");
         }
     }
 }
