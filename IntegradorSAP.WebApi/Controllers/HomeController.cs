@@ -26,7 +26,19 @@ namespace IntegradorSAP.WebApi.Controllers
         /// </summary>
         public ActionResult Index()
         {
-            return Redirect("~/swagger");
+            return Redirect(RutaInterfazSwagger);
         }
+
+        /// <summary>
+        /// /swagger tambien lleva a la interfaz, porque es la URL que la gente
+        /// escribe por costumbre. La sirve un archivo estatico y no
+        /// EnableSwaggerUi: ver la explicacion en SwaggerConfig.
+        /// </summary>
+        public ActionResult Swagger()
+        {
+            return Redirect(RutaInterfazSwagger);
+        }
+
+        private const string RutaInterfazSwagger = "~/swagger-ui/index.html";
     }
 }

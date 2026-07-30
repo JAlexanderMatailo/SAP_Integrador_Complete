@@ -87,6 +87,22 @@ Se usa **Swashbuckle 5.6 clásico**, no `Swashbuckle.AspNetCore`: este proyecto 
 Web API 2 sobre .NET Framework 4.8 y el paquete de AspNetCore solo sirve en
 .NET Core. Se registra desde `WebApiConfig.Register`, no con `WebActivatorEx`.
 
+**La interfaz es Swagger UI 5.x servida como contenido estático** desde
+`swagger-ui/`, no la que empaqueta Swashbuckle. Motivo: Swashbuckle.Core 5.6 trae
+Swagger UI **2.2.10, de 2016** (la de cabecera verde con la caja `api_key`),
+porque la versión moderna solo viene en el paquete de AspNetCore. Como el
+documento que genera es válido, cualquier versión de la UI puede renderizarlo:
+solo cambia la carcasa.
+
+Por eso en `SwaggerConfig` **no** se llama a `EnableSwaggerUi` — ahí está
+explicado, junto con cómo volver a la UI empaquetada si se quisiera. Los `.css` y
+`.js` están en el repositorio y no en un CDN, porque el servidor del integrador
+puede no tener salida a internet.
+
+Nota: Swashbuckle.Core genera **Swagger 2.0**, no OpenAPI 3.0. Swagger UI 5.x lo
+renderiza sin problema, pero conviene saberlo si alguna herramienta externa
+espera OpenAPI 3.
+
 Las descripciones salen de los comentarios `///`, para lo cual ambos proyectos
 generan `DocumentationFile` (con `NoWarn 1591`, porque el código heredado no
 tiene comentarios en todos sus miembros públicos).

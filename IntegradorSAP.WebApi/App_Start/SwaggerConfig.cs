@@ -65,12 +65,26 @@ namespace IntegradorSAP.WebApi
                     }
 
                     c.DescribeAllEnumsAsStrings();
-                })
-                .EnableSwaggerUi(c =>
-                {
-                    c.DocumentTitle("Integrador SAP - API");
-                    c.DocExpansion(DocExpansion.List);
                 });
+
+            // Aqui NO se llama a EnableSwaggerUi a proposito.
+            //
+            // Swashbuckle.Core 5.6 empaqueta Swagger UI 2.2.10, de 2016: la de
+            // cabecera verde con la caja "api_key". La version moderna viene en
+            // Swashbuckle.AspNetCore, que solo funciona en .NET Core.
+            //
+            // Como el documento OpenAPI que se genera arriba es valido y
+            // cualquier version de la UI puede renderizarlo, se sirve Swagger UI
+            // 5.x como contenido estatico desde /swagger-ui/index.html, apuntando
+            // a /swagger/docs/v1. Solo cambia la carcasa, no el documento.
+            //
+            // Si algun dia se quiere volver a la UI empaquetada, basta con
+            // descomentar esto y quitar la redireccion de HomeController:
+            //
+            //   .EnableSwaggerUi(c => {
+            //       c.DocumentTitle("Integrador SAP - API");
+            //       c.DocExpansion(DocExpansion.List);
+            //   });
         }
 
         /// <summary>

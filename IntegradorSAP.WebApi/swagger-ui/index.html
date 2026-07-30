@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+  Interfaz moderna de Swagger UI para el Integrador SAP.
+
+  Por que este archivo existe: el paquete Swashbuckle.Core 5.6 (el unico
+  disponible para ASP.NET Web API 2 sobre .NET Framework) empaqueta Swagger UI
+  2.2.10, de 2016, la de cabecera verde. Swashbuckle.AspNetCore, que trae la UI
+  moderna, solo funciona en .NET Core.
+
+  Como se resuelve: el documento OpenAPI que genera Swashbuckle es valido y
+  cualquier version de la UI puede renderizarlo, asi que aqui se sirve Swagger UI
+  5.x apuntando al mismo documento. Solo cambia la carcasa.
+
+  Los archivos .css y .js estan en esta misma carpeta a proposito, no en un CDN:
+  el servidor del integrador puede no tener salida a internet.
+
+  Nota: Swashbuckle.Core genera Swagger 2.0, no OpenAPI 3.0. Swagger UI 5.x
+  renderiza Swagger 2.0 sin problema.
+-->
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Integrador SAP - API</title>
+    <link rel="stylesheet" href="swagger-ui.css" />
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+    <style>
+        html { box-sizing: border-box; overflow-y: scroll; }
+        *, *:before, *:after { box-sizing: inherit; }
+        body { margin: 0; background: #fafafa; }
+    </style>
+</head>
+<body>
+    <div id="swagger-ui"></div>
+
+    <script src="swagger-ui-bundle.js" charset="UTF-8"></script>
+    <script src="swagger-ui-standalone-preset.js" charset="UTF-8"></script>
+    <script>
+        window.onload = function () {
+            window.ui = SwaggerUIBundle({
+                // Ruta relativa: funciona igual en localhost, en IIS y bajo un
+                // directorio virtual, sin tener que reconfigurar nada.
+                url: "../swagger/docs/v1",
+                dom_id: "#swagger-ui",
+                deepLinking: true,
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIStandalonePreset
+                ],
+                plugins: [
+                    SwaggerUIBundle.plugins.DownloadUrl
+                ],
+                layout: "StandaloneLayout",
+                // Los endpoints se listan plegados: son 74 rutas.
+                docExpansion: "list",
+                filter: true,
+                displayRequestDuration: true,
+                tryItOutEnabled: true
+            });
+        };
+    </script>
+</body>
+</html>
