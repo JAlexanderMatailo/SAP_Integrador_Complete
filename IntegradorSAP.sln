@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1062
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegradorSAP.WebApi", "IntegradorSAP.WebApi\IntegradorSAP.WebApi.csproj", "{CAE6FDCD-4CED-4E68-97FD-AE8932381D28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegradorSAP.Data", "IntegradorSAP.Services\IntegradorSAP.Data.csproj", "{4D5F8738-3D96-4864-83C2-AF2B7381622E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAE6FDCD-4CED-4E68-97FD-AE8932381D28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAE6FDCD-4CED-4E68-97FD-AE8932381D28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAE6FDCD-4CED-4E68-97FD-AE8932381D28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAE6FDCD-4CED-4E68-97FD-AE8932381D28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D5F8738-3D96-4864-83C2-AF2B7381622E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D5F8738-3D96-4864-83C2-AF2B7381622E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D5F8738-3D96-4864-83C2-AF2B7381622E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D5F8738-3D96-4864-83C2-AF2B7381622E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {70EB1FAD-73AA-462B-AC8A-D7568E991AA3}
+	EndGlobalSection
+EndGlobal
