@@ -14,6 +14,11 @@
     <HanaClientPath Condition=" '$(HanaClientPath)' == '' And Exists('$(ProgramW6432)\SAP\hdbclient\ado.net\v4.5\Sap.Data.Hana.v4.5.dll') ">$(ProgramW6432)\SAP\hdbclient\ado.net\v4.5</HanaClientPath>
     <!-- 3) por defecto el paquete, para que el error indique que falta el restore. -->
     <HanaClientPath Condition=" '$(HanaClientPath)' == '' ">$(MSBuildProjectDirectory)\..\packages\SapHana.1.0.3\lib\net45</HanaClientPath>
+    <!-- XML de documentacion: Swagger lo usa para las descripciones de los
+         endpoints. NoWarn 1591 evita miles de avisos por miembros publicos sin
+         comentario /// (el codigo heredado no los tiene). -->
+    <DocumentationFile>bin\IntegradorSAP.WebApi.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>
@@ -94,6 +99,9 @@
     <Reference Include="Sap.Data.Hana.v4.5, Version=2.17.22.0, Culture=neutral, PublicKeyToken=0326b8ea63db4bc4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(HanaClientPath)\Sap.Data.Hana.v4.5.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -176,6 +184,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />

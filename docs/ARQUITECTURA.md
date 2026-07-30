@@ -65,7 +65,27 @@ La base de SAP **no está fijada en el integrador**: llega en cada petición.
 
 Se valida antes de tocar SAP o HANA (ver [§5.2](#52-lista-blanca-de-empresas)).
 
-### 2.3 Formato de la respuesta
+### 2.3 Swagger
+
+| URL | Qué es |
+|---|---|
+| `/swagger` | la interfaz para explorar y probar |
+| `/swagger/docs/v1` | el documento OpenAPI en JSON |
+
+Las cabeceras `X-SAP-User` y `X-SAP-Password` aparecen en **todas** las
+operaciones, así que se pueden escribir desde la interfaz y probar contra SAP.
+No son parámetros de acción (las lee `SapCredentialsHandler`), por eso las añade
+el filtro `CabecerasCredencialesSap` de `App_Start/SwaggerConfig.cs`.
+
+Se usa **Swashbuckle 5.6 clásico**, no `Swashbuckle.AspNetCore`: este proyecto es
+Web API 2 sobre .NET Framework 4.8 y el paquete de AspNetCore solo sirve en
+.NET Core. Se registra desde `WebApiConfig.Register`, no con `WebActivatorEx`.
+
+Las descripciones salen de los comentarios `///`, para lo cual ambos proyectos
+generan `DocumentationFile` (con `NoWarn 1591`, porque el código heredado no
+tiene comentarios en todos sus miembros públicos).
+
+### 2.4 Formato de la respuesta
 
 **Todos** los endpoints devuelven la misma forma, `RespuestaGenerica`:
 

@@ -34,6 +34,11 @@ namespace IntegradorSAP.WebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // Swagger. Se registra al final, cuando las rutas ya estan definidas:
+            // Swashbuckle recorre el mapa de rutas para generar el documento.
+            // Interfaz en /swagger, documento OpenAPI en /swagger/docs/v1
+            SwaggerConfig.Register(config);
         }
     }
 }
