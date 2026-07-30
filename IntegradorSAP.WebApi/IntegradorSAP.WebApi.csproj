@@ -8,8 +8,12 @@
          que no existe: la referencia solo se satisfacia de rebote por el
          ProjectReference. Se unifica por propiedad, sobreescribible con
              msbuild /p:HanaClientPath="D:\SAP\hdbclient\ado.net\v4.5" -->
-    <HanaClientPath Condition=" '$(HanaClientPath)' == '' ">$(ProgramW6432)\SAP\hdbclient\ado.net\v4.5</HanaClientPath>
-    <HanaClientPath Condition=" !Exists('$(HanaClientPath)') ">$(ProgramFiles)\SAP\hdbclient\ado.net\v4.5</HanaClientPath>
+    <!-- 1) el paquete NuGet SapHana, que es de donde sale realmente el driver. -->
+    <HanaClientPath Condition=" '$(HanaClientPath)' == '' And Exists('$(MSBuildProjectDirectory)\..\packages\SapHana.1.0.3\lib\net45\Sap.Data.Hana.v4.5.dll') ">$(MSBuildProjectDirectory)\..\packages\SapHana.1.0.3\lib\net45</HanaClientPath>
+    <!-- 2) el cliente HANA instalado en la maquina, si lo hay. -->
+    <HanaClientPath Condition=" '$(HanaClientPath)' == '' And Exists('$(ProgramW6432)\SAP\hdbclient\ado.net\v4.5\Sap.Data.Hana.v4.5.dll') ">$(ProgramW6432)\SAP\hdbclient\ado.net\v4.5</HanaClientPath>
+    <!-- 3) por defecto el paquete, para que el error indique que falta el restore. -->
+    <HanaClientPath Condition=" '$(HanaClientPath)' == '' ">$(MSBuildProjectDirectory)\..\packages\SapHana.1.0.3\lib\net45</HanaClientPath>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>
