@@ -298,16 +298,11 @@ __pycache__/
 # OpenCover UI analysis results
 OpenCover/
 
-# Log de LogGeneral. Se escribe en AppDomain.BaseDirectory, que en una app web
-# es la raiz del proyecto, asi que aparece aqui al ejecutar. Es un artefacto de
-# ejecucion, no codigo.
-**/log.txt
-
-# Credenciales de SAP para pruebas locales, en formato usuario|clave.
-# Es OPCIONAL: en producción las credenciales llegan en las cabeceras
-# X-SAP-User / X-SAP-Password que envía la API consumidora.
-# El formato está documentado en el comentario de <appSettings> de Web.config.
-# Las empresas permitidas NO van aquí: están en Web.config, versionadas.
+# Secretos de conexión a SAP. Contiene UserHana/PwdHana (obligatorias) y, como
+# respaldo opcional para pruebas locales, Sap.Login.* en formato usuario|clave.
+# Plantilla versionada: IntegradorSAP.WebApi/Config/sapCompanies.example.config
+# Lo que NO es secreto (ServerSSL, ServerHana, PortHana,
+# Sap.CompanyDbPermitidas, timeouts) va en Web.config, versionado.
 **/Config/sapCompanies.config
 
 # Log de diagnostico que escribe LogGeneral (BaseDirectory/log.txt).
