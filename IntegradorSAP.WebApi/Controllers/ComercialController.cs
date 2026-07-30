@@ -151,7 +151,7 @@ namespace IntegradorSAP.WebApi.Controllers
         //    return respuestas;
         //}
 
-        [Route("GuardarOrdenVentaCTK")]
+        [Route("GuardarOrdenVentaEmpresa1")]
         public RespuestaGenerica GuardarOrdenVentaComercial([FromBody] OrdenVentaGuardarRequest orden)
         {
 
@@ -164,7 +164,7 @@ namespace IntegradorSAP.WebApi.Controllers
             return respuesta;
         }
 
-        [Route("GuardarOrdenVentaCTKMarlon")]
+        [Route("GuardarOrdenVentaEmpresa3")]
         public RespuestaGenerica GuardarOrdenVentaTurnos([FromBody] OrdenVentaGuardarRequest orden)
         {
             List<RespuestaGenerica> respuestas = new List<RespuestaGenerica>();
@@ -174,7 +174,7 @@ namespace IntegradorSAP.WebApi.Controllers
             return respuesta;
         }
 
-        [Route("GuardarOrdenVentaRFSTurnos")]
+        [Route("GuardarOrdenVentaEmpresa4")]
         public RespuestaGenerica GuardarOrdenVentaRFSTurnos([FromBody] OrdenVentaGuardarRequest orden)
         {
             List<RespuestaGenerica> respuestas = new List<RespuestaGenerica>();
@@ -224,7 +224,7 @@ namespace IntegradorSAP.WebApi.Controllers
         }
         
         [HttpGet]
-        [Route("ValidarOrdenVentaRFSTurnos/{CodTurno}/{database}")]
+        [Route("ValidarOrdenVentaEmpresa1/{CodTurno}/{database}")]
         public bool ValidarOrdenVentaRFSTurnos(string CodTurno, string database)
         {
             try

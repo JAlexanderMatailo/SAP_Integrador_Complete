@@ -78,7 +78,7 @@ namespace IntegradorSAP.WebApi.Controllers
 
             return respuesta;
         }
-        [Route("PostOVGuardarAtcotrans")]
+        [Route("PostOVGuardarEmpresa")]
         public RespuestaGenerica PostOVGuardarAtcotrans([FromBody]OrdenVentaAtcontransGuardar value)
         {
 
@@ -89,7 +89,7 @@ namespace IntegradorSAP.WebApi.Controllers
             return respuesta;
         }
 
-        [Route("PostOVGuardarRFS")]
+        [Route("PostOVGuardarEmpresa2")]
         public RespuestaGenerica PostOVGuardarRFS([FromBody] OrdenVentaGuardarRFSViewModel value)
         {
 
